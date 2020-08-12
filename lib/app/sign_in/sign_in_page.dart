@@ -10,7 +10,7 @@ class SignInPage extends StatelessWidget {
         elevation: 5.0,
       ),
       body: _buildContent(),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[300],
     );
   }
 
@@ -29,21 +29,20 @@ class SignInPage extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 50.0),
+          SizedBox(height: 60.0),
           CustomRaisedButton(
-            buttonTitle: 'Sign in with Google',
-            buttonColor: Colors.white,
+            btnTitle: 'Sign in with Google',
+            btnImage: Image.asset('images/icons8-google-50.png'),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 12.0),
           CustomRaisedButton(
-            buttonTitle: 'Sign in with Facebook',
-            buttonColor: Color(0xFF334D92),
-            textColor: Colors.white,
+            btnTitle: 'Sign in with Facebook',
+            btnImage: Image.asset('images/icons8-facebook-50.png'),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 12.0),
           CustomRaisedButton(
-            buttonTitle: 'Sign in as guest',
-            buttonColor: Colors.green[500],
+            btnTitle: 'Sign in as a guest',
+            btnImage: Image.asset('images/icons8-person-50.png'),
           ),
         ],
       ),
