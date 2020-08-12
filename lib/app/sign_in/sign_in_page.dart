@@ -25,8 +25,9 @@ class SignInPage extends StatelessWidget {
             'Sign in',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 32.0,
-              fontWeight: FontWeight.w600,
+              fontSize: 44.0,
+              color: Colors.deepPurple,
+              fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 60.0),
@@ -41,7 +42,12 @@ class SignInPage extends StatelessWidget {
           ),
           SizedBox(height: 12.0),
           CustomRaisedButton(
-            btnTitle: 'Sign in as a guest',
+            btnTitle: 'Sign in with email',
+            btnImage: Image.asset('images/icons8-mailbox-50.png'),
+          ),
+          SizedBox(height: 12.0),
+          CustomRaisedButton(
+            btnTitle: 'Sign in as guest',
             btnImage: Image.asset('images/icons8-person-50.png'),
           ),
         ],

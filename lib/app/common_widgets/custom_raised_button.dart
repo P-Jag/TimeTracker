@@ -6,7 +6,8 @@ class CustomRaisedButton extends StatelessWidget {
     this.height: 60.0,
     this.textColor: Colors.black87,
     @required this.btnImage,
-  });
+  })  : assert(btnTitle != null),
+        assert(btnImage != null);
 
   final String btnTitle;
   final double height;
