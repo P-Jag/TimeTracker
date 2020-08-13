@@ -6,6 +6,7 @@ class CustomRaisedButton extends StatelessWidget {
     this.height: 60.0,
     this.textColor: Colors.black87,
     @required this.btnImage,
+    this.onPressed,
   })  : assert(btnTitle != null),
         assert(btnImage != null);
 
@@ -13,6 +14,7 @@ class CustomRaisedButton extends StatelessWidget {
   final double height;
   final Color textColor;
   final Widget btnImage;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class CustomRaisedButton extends StatelessWidget {
             Radius.circular(10.0),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
       ),
     );
   }

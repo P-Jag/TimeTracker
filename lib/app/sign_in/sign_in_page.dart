@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/app/common_widgets/custom_raised_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInPage extends StatelessWidget {
+  Future<void> _signInAnonymously() async {
+    try {
+      final authResult = await FirebaseAuth.instance.signInAnonymously();
+      print('signed in');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +59,7 @@ class SignInPage extends StatelessWidget {
           CustomRaisedButton(
             btnTitle: 'Sign in as guest',
             btnImage: Image.asset('images/icons8-person-50.png'),
+            onPressed: _signInAnonymously,
           ),
         ],
       ),
