@@ -3,10 +3,13 @@ import 'package:time_tracker/app/common_widgets/custom_raised_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInPage extends StatelessWidget {
+  SignInPage({this.onSignIn});
+  final Function(FirebaseUser) onSignIn;
+
   Future<void> _signInAnonymously() async {
     try {
       final authResult = await FirebaseAuth.instance.signInAnonymously();
-      print('signed in');
+      onSignIn(authResult.user);
     } catch (e) {
       print(e.toString());
     }
