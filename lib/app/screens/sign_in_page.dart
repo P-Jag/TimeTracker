@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:time_tracker/app/common_widgets/custom_raised_button.dart';
+import 'package:time_tracker/app/screens/email_sign_in_page.dart';
 import 'package:time_tracker/app/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({@required this.auth});
   final AuthBase auth;
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _signInWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => EmailSignInPage(),
+      ),
+    );
+  }
 
   Future<void> _signInAnonymously() async {
     try {
@@ -21,12 +40,12 @@ class SignInPage extends StatelessWidget {
         title: Text('Time Tracker'),
         elevation: 5.0,
       ),
-      body: _buildContent(),
+      body: _buildContent(context),
       backgroundColor: Colors.grey[300],
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -46,16 +65,13 @@ class SignInPage extends StatelessWidget {
           CustomRaisedButton(
             btnTitle: 'Sign in with Google',
             btnImage: Image.asset('images/icons8-google-50.png'),
-          ),
-          SizedBox(height: 12.0),
-          CustomRaisedButton(
-            btnTitle: 'Sign in with Facebook',
-            btnImage: Image.asset('images/icons8-facebook-50.png'),
+            onPressed: _signInWithGoogle,
           ),
           SizedBox(height: 12.0),
           CustomRaisedButton(
             btnTitle: 'Sign in with email',
             btnImage: Image.asset('images/icons8-mailbox-50.png'),
+            onPressed: () => _signInWithEmail(context),
           ),
           SizedBox(height: 12.0),
           CustomRaisedButton(
