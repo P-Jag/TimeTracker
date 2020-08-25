@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:time_tracker/app/common_widgets/custom_raised_button.dart';
 import 'package:time_tracker/app/screens/email_sign_in_page.dart';
 import 'package:time_tracker/app/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({@required this.auth});
-  final AuthBase auth;
-
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogle(BuildContext context) async {
     try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
@@ -20,15 +19,14 @@ class SignInPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => EmailSignInPage(
-          auth: auth,
-        ),
+        builder: (context) => EmailSignInPage(),
       ),
     );
   }
 
-  Future<void> _signInAnonymously() async {
+  Future<void> _signInAnonymously(BuildContext context) async {
     try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
@@ -67,7 +65,7 @@ class SignInPage extends StatelessWidget {
           CustomRaisedButton(
             btnTitle: 'Sign in with Google',
             btnImage: Image.asset('images/icons8-google-50.png'),
-            onPressed: _signInWithGoogle,
+            onPressed: () => _signInWithGoogle(context),
           ),
           SizedBox(height: 12.0),
           CustomRaisedButton(
@@ -79,7 +77,7 @@ class SignInPage extends StatelessWidget {
           CustomRaisedButton(
             btnTitle: 'Sign in as guest',
             btnImage: Image.asset('images/icons8-person-50.png'),
-            onPressed: _signInAnonymously,
+            onPressed: () => _signInAnonymously(context),
           ),
         ],
       ),
