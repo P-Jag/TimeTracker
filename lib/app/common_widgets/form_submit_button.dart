@@ -17,6 +17,7 @@ class FormSubmitButton extends StatelessWidget {
         ),
         elevation: 5.0,
         color: Colors.deepPurple[300],
+        disabledColor: Colors.deepPurple[300],
         child: Text(
           title,
           style: TextStyle(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:time_tracker/app/common_widgets/platform_alert_dialog.dart';
+import 'package:time_tracker/app/common_widgets/platfrom_exception_alert_dialog.dart';
 import 'package:time_tracker/app/services/auth.dart';
 import 'package:time_tracker/app/services/validators.dart';
 import 'form_submit_button.dart';
@@ -28,6 +30,15 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   bool _submitted = false;
   bool _isLoading = false;
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   void _submit() async {
     setState(() {
       _submitted = true;
@@ -41,11 +52,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         await auth.createUserWithEmailAndPassword(_email, _password);
       }
       Navigator.of(context).pop();
-    } catch (e) {
-      PlatformAlertDialog(
+    } on PlatformException catch (e) {
+      PlatformExceptionAlertDialog(
         title: 'Sign in failed',
-        content: e.toString(),
-        defaultActionText: 'OK',
+        exception: e,
       ).show(context);
     } finally {
       setState(() {
